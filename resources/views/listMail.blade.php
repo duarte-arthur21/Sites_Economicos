@@ -10,7 +10,7 @@
 @endphp
 
 @section('content')
-<!-- Modal -->
+<!-- Modal Delete -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -36,34 +36,81 @@
   </div>
 </div>
 
+<!-- Modal Escrever-->
+<div class="modal fade" id="escreverModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+    <form action="{{route('create.mailAdmin')}}" method="POST">
+      @csrf
+      <div class="modal-body">
+                <input  name="email" class="form-control col-sm-12" type="text" placeholder="E-mail*">
+            </div>
+            <div class="modal-body">
+                <select name="assunto" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                    <option class="dropdown-menu" aria-labelledby="dropdownMenuButton1">Selecione tipo de Assunto</option>
+                    <option class="dropdown-item" value="Assunto1">Assunto 1</option>
+                    <option class="dropdown-item" value="Assunto2">Assunto 2</option>
+                    <option class="dropdown-item" value="Assunto3">Assunto 3</option>
+                    <option class="dropdown-item" value="Assunto4">Assunto 4</option>
+                    <option class="dropdown-item" value="Assunto5">Assunto 5</option>
+                </select>
+          </div>
+          <div class="modal-body">
+                <textarea class="form-control" name="texto" placeholder="Escreva sua mensagem"></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send-fill" viewBox="0 0 16 16">
+                    <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"/>
+                </svg>  Enviar
+            </button>
+          </div> 
+    </form>
+
+    </div>
+  </div>
+</div>
+
 
 <nav class="navbar navbar-light bg-primary justify-content-between">
 	<p class="navbar-brand">Mensagens Recebidas</p>    
 
-    <div class="dropdown">
+    <div id="adminMailBtn" class="card-body ">
+        <button type="button" class="btn btn-default float-right">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+            </svg>        Escrever
+        </button>
+    </div>
+</nav>
+
+<div class="card-body">
         <form action="{{route('listMails.search')}}" method="post">
                 @csrf
-                <select name="searchAssunto" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
-                    <option class="dropdown-menu" aria-labelledby="dropdownMenuButton1">Selecione tipo de Assunto</option>
-                    <option class="dropdown-item" value="Assunto">Assunto</option>
-                    <option class="dropdown-item" value="Coisa">Coisa</option>
-                    <option class="dropdown-item" value="Alguma coisa">Alguma coisa</option>
-                    <option class="dropdown-item" value="10:30">10:30 am</option>
+                <select name="searchAssunto" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                <option class="dropdown-menu" aria-labelledby="dropdownMenuButton1">Selecione tipo de Assunto</option>
+                    <option class="dropdown-item" value="Assunto1">Assunto 1</option>
+                    <option class="dropdown-item" value="Assunto2">Assunto 2</option>
+                    <option class="dropdown-item" value="Assunto3">Assunto 3</option>
+                    <option class="dropdown-item" value="Assunto4">Assunto 4</option>
+                    <option class="dropdown-item" value="Assunto5">Assunto 5</option>
                 </select>
 
-                <select name="searchLida" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
+                <select name="searchLida" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown">
                     <option class="dropdown-menu" aria-labelledby="dropdownMenuButton1">Selecione Status</option>
                     <option class="dropdown-item" value=0 >Não lida</option>
                     <option class="dropdown-item" value=1>Lida</option>
                 </select>
 
-            <div class="row">
-                <button type="submit" class="btn btn-primary">Filtrar</button>
-            </div>      
-                
+                <button type="submit" class="btn btn-default">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
+                        <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+                    </svg>   Filtrar
+                </button>                
         </form>
     </div>
-</nav>
 
 <div id="msg-container" class="col-md-12">
     <table class="table table-striped">
@@ -123,6 +170,14 @@
                 var mail_id = $(this).val();
                 $('#mail_id').val(mail_id);
                 $('#deleteModal').modal('show');
+			});
+        });
+
+        $(document).ready(function() {
+			$('#adminMailBtn').click(function(e){ 
+                e.preventDefault();
+
+                $('#escreverModal').modal('show');
 			});
         });
 

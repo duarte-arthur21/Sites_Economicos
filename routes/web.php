@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\MensagemController;
 use App\Http\Controllers\ListUserController;
+use App\Http\Controllers\MailAdminController;
+
 
 use Illuminate\Support\Facades\Route;
 
@@ -29,7 +31,6 @@ Route::post('/mensagem/searchMsgLida', [MensagemController::class, 'searchMsgLid
 Route::post('/mensagem/searchAssunto', [MensagemController::class, 'searchAssunto'])->name('listMails.searchAssunto');
 
 
-
 Route::get('/mensagem/{id}', [MensagemController::class, 'show']);
 
 Route::post('/create', [MensagemController::class, 'store']);
@@ -37,6 +38,9 @@ Route::post('/create', [MensagemController::class, 'store']);
 Route::post('/listMails/update', [MensagemController::class, 'update'])->name('listMails.update');
 
 Route::delete('/listMails/destroy', [MensagemController::class, 'destroy'])->name('listMails.delete');
+
+Route::post('/mailAdmin/create', [MailAdminController::class, 'store'])->name('create.mailAdmin');
+
 
 // Route::resource('listUsers', ListUserController::class)->except(['update']);
 //Route::post('/mensagem/destroy', [MensagemController::class, 'destroy'])->name('listUsers.destroy');
